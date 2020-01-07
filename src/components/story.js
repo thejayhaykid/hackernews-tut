@@ -15,15 +15,12 @@ export const Story = ({ storyId }) => {
             <StoryTitle>
                 <a href={story.url}>{story.title}</a>
             </StoryTitle>
-
             <StoryMeta>
-                <span className="story__by" data-testid="story-by">
-                    <StoryMetaElement color="#000">By: </StoryMetaElement> {story.by}
+                <span data-testid="story-by">
+                    <StoryMetaElement color="#000">By:</StoryMetaElement> {story.by}
                 </span>
-            </StoryMeta>
-            <StoryMeta>
-                <span className="story__time" data-testid="story-time">
-                    <StoryMetaElement color="#000">Time: </StoryMetaElement> {` `}
+                <span data-testid="story-time">
+                    <StoryMetaElement color="#000">Posted:</StoryMetaElement> {` `}
                     {mapTime(story.time)}
                 </span>
             </StoryMeta>
