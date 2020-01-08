@@ -1,28 +1,25 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { render, cleanup, waitForElement } from '@testing-library/react';
+import { render, cleanup, waitForElement, getByTestId } from '@testing-library/react';
 import { Story } from '../components/story';
 import { singularStory } from '../fixtures';
 import { getStory } from '../services/hnApi';
-import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
-import { STORY_INCREMENT } from '../constants';
 
-beforeEach(cleanup);
-
-jest.mock('../hooks/useInfiniteScroll.js');
+beforeEach(() => {
+    cleanup();
+    jest.resetAllMocks();
+});
 
 jest.mock('../services/hnApi', () => ({
     getStory: jest.fn(),
 }));
 
-test('renders the application', async () => {
-    useInfiniteScroll.mockImplementation(() => ({
-        count: STORY_INCREMENT,
-    }));
+test('renders the story component', async () => {
     getStory.mockImplementation(() => Promise.resolve(singularStory));
 
-    const {getByText, queryByTestId } = render(<Story />);
+    const {getByText, queryByTestId, getByTestId } = render(<Story storyId="1" />);
     await waitForElement(() => [
+        expect(getByTestId('story')).toBeTruthy(),
         expect(getByText('Test Title')).toBeTruthy(),
         expect(queryByTestId('story-by').textContent).toEqual('By: Karl Hadwen'),
     ]);

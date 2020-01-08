@@ -16,7 +16,7 @@ jest.mock('../services/hnApi', () => ({
     getStoryIds: jest.fn(),
 }));
 
-test('renders the application', async () => {
+test('renders the story container with a story', async () => {
     useInfiniteScroll.mockImplementation(() => ({
         count: STORY_INCREMENT,
     }));
