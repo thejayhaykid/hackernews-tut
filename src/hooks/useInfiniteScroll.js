@@ -26,6 +26,8 @@ export const useInfiniteScroll = () => {
         } else {
             setCount(count + STORY_INCREMENT);
         }
+
+        setLoading(false);
     }, [loading]);
 
     useEffect(() => {
